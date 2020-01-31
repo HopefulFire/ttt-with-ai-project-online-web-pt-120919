@@ -22,4 +22,40 @@ class Board
 		cells[input.to_i - 1]
 	end
 
+	def full?
+		!cells.any? do |cell|
+			cell == ' '
+		end
+	end
+
+	def turn_count
+		count = 0
+		cells.each do |cell|
+			if cell != ' '
+				count += 1
+			end
+		end
+		count
+	end
+
+	def taken?(input)
+		if position(input) != ' '
+			true
+		else
+			false
+		end
+	end
+
+	def valid_move?(input)
+		if input.to_i < 10 && input.to_i > 0 && !taken?(input)
+			true
+		else
+			false
+		end
+	end
+
+	def update(input, player)
+		@cells[input.to_i - 1] = player.token
+	end
+
 end
